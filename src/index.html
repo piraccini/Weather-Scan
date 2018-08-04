@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather-scan</title>
+</head>
+<body>
+    The weather is: <span id='weather'></span>
+</body>
+<script>
+    var request = fetch('http://api.openweathermap.org/data/2.5/weather?q=bologna&APPID=4e12b5ee594669426623b646e8c21906');
+    request.then((response) => response.json()).then((forecast) => 
+    {
+        console.log(forecast);
+        document.getElementById('weather').innerHTML = forecast.weather[0].main;
+    });
+</script>
+</html>
