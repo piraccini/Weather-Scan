@@ -7,14 +7,23 @@
     <title>Weather-scan</title>
 </head>
 <body>
-    The weather is: <span id='weather'></span>
+    Search weather for <input type='text' id='city' placeholder="city"><button onclick="search()">Search</button>
+    <p>
+        The weather is: <span id='weather'></span>
+        The temperature is: <span id='temperature'></span>
+    </p>
 </body>
 <script>
-    var request = fetch('http://api.openweathermap.org/data/2.5/weather?q=bologna&APPID=4e12b5ee594669426623b646e8c21906');
-    request.then((response) => response.json()).then((forecast) => 
+    function search()
     {
-        console.log(forecast);
-        document.getElementById('weather').innerHTML = forecast.weather[0].main;
-    });
+        var city = document.getElementById('city').value;
+        var request = fetch('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&APPID=4e12b5ee594669426623b646e8c21906');
+        request.then((response) => response.json()).then((forecast) => 
+        {
+            console.log(forecast);
+            document.getElementById('weather').innerHTML = forecast.weather[0].main;
+            document.getElementById('temperature').innerHTML = forecast.main.temp;
+        });
+    }
 </script>
 </html>
